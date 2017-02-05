@@ -3,15 +3,15 @@ import javax.swing.JFrame;
 /**
  * 
  * @author gjm19_000
- *	WarPanel is used to initialization
+ *	Main is used to initialization
  *	Create frame and add new panels in
  *
  */
-public class WarPanel extends JFrame {
+public class Main extends JFrame {
 	
 	MyPanel mp;
 	
-	public WarPanel(){
+	public Main(){
 		mp = new MyPanel();
 		
 		this.add(mp);
@@ -24,6 +24,6 @@ public class WarPanel extends JFrame {
 	}
 	
 	public static void main(String args[]){
-		WarPanel wp = new WarPanel();
+		Main wp = new Main();
 	}
 }
