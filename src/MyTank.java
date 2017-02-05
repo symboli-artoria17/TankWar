@@ -5,5 +5,26 @@ public class MyTank extends Tank {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	public void goUp(){
+		this.setY(this.getY()-this.getSpeed());
+	}
+	
+	public void goDown(){
+		this.setY(this.getY()+this.getSpeed());
+	}
+	
+	public void goLeft(){
+		this.setX(this.getX()-this.getSpeed());
+	}
+	
+	public void goRight(){
+		this.setX(this.getX()+this.getSpeed());
+	}
+	
+	public void shoot(){
+		switch(this.getDirection()){
+			
+		}
+	}
 }

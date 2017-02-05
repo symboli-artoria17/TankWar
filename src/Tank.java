@@ -1,6 +1,24 @@
 
 public class Tank {
 	private int x,y;
+	private int direction = 0;
+	private int speed = 3;
+	
+	public int getDirection() {
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
 
 	public int getX() {
 		return x;

@@ -15,6 +15,8 @@ public class WarPanel extends JFrame {
 		mp = new MyPanel();
 		
 		this.add(mp);
+		this.addKeyListener(mp); // key listener
+		
 		this.setSize(400,300);
 		this.setLocationRelativeTo(null); // set the panel at the center
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
