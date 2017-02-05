@@ -21,6 +21,9 @@ public class Main extends JFrame {
 		this.setLocationRelativeTo(null); // set the panel at the center
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+		
+		Thread t = new Thread(mp);
+		t.start();
 	}
 	
 	public static void main(String args[]){

@@ -47,7 +47,7 @@ public class MyTank extends Tank {
 			break;		
 		}
 		
-		
+		// System.out.println(bullets.size());
 		Thread t = new Thread(bullet);
 		t.start();
 	}

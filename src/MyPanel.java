@@ -35,16 +35,38 @@ public class MyPanel extends JPanel implements KeyListener, Runnable{
 		// draw player's tank
 		this.drawTank(mt.getX(), mt.getY(), g, mt.getDirection(), 0);
 		
+		
+		//////////
+		for(int i=0;i<mt.bullets.size();i++){
+			Bullet b = mt.bullets.get(i);
+			
+			if (b.isActive()){
+				for(int j=0;j<enemies.size();j++){
+					EnemyTank et = enemies.get(j);
+					if(et.isActive()){
+						
+						this.hitted(b,et);
+						
+					}
+				}
+			}
+			
+		}
+		/////////
+		
 		// draw enemies' tank
-		for (int i=0; i<EnemyNumber; i++){
-			this.drawTank(enemies.get(i).getX(), enemies.get(i).getY(), g, 2, 1);
+		for (int i=0; i<enemies.size(); i++){
+			
+			if (enemies.get(i).isActive()){
+				this.drawTank(enemies.get(i).getX(), enemies.get(i).getY(), g, 2, 1);
+			}
 		}
 		
 		// draw bullets
 		for (int i=0;i<mt.bullets.size();i++){
 			Bullet myBullet = mt.bullets.get(i);
 				if (myBullet.isActive()){
-					g.setColor(Color.white);
+					g.setColor(Color.red);
 					g.fill3DRect(myBullet.getX(), myBullet.getY(), 3, 3, false);
 				} else {
 					mt.bullets.remove(myBullet);
@@ -124,7 +146,40 @@ public class MyPanel extends JPanel implements KeyListener, Runnable{
 		
 		this.repaint();
 	}
-
+	
+	public void hitted(Bullet b, EnemyTank et) {
+		
+		switch(et.getDirection()){
+		case 0:
+		case 2:
+			if(b.getX()>et.getX() && b.getX()<et.getX()+20 && b.getY()>et.getY() && b.getY()<et.getY()+30)
+			{
+				b.setActive(false);
+				et.setActive(false);
+				/*
+				b2=true;
+				Baozha bz=new Baozha(et.x,et.y);
+				bzjh.add(bz);
+				*/
+			}
+			break;
+		case 1:
+		case 3:
+			if(b.getX()>et.getX() && b.getX()<et.getX()+30 && b.getY()>et.getY() && b.getY()<et.getY()+20)
+			{
+				b.setActive(false);
+				et.setActive(false);
+				/*
+				b2=true;
+				Baozha bz=new Baozha(et.x,et.y);
+				bzjh.add(bz);
+				*/	
+			}	
+			
+		}
+	}
+	
+	
 	@Override
 	public void keyReleased(KeyEvent arg0) {}
 
@@ -138,12 +193,17 @@ public class MyPanel extends JPanel implements KeyListener, Runnable{
 				// repaint every 100 millisecond
 				// save the resources(memory)
 				Thread.sleep(100);
+				
 			}catch(Exception e){
-				e.printStackTrace();
+				e.printStackTrace(System.out);
 			}
 			
-			this.repaint();
+			this.repaint();	
+			
+		
 		}
 		
 	}
+
+	
 }

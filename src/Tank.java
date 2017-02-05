@@ -3,7 +3,16 @@ public class Tank {
 	private int x,y;
 	private int direction = 0;
 	private int speed = 3;
+	private boolean active = true;
 	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	public int getDirection() {
 		return direction;
 	}

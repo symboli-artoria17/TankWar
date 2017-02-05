@@ -1,7 +1,7 @@
 
 public class Bullet implements Runnable {
 	private int x,y,direction;
-	private int speed = 4;
+	private int speed = 2;
 	private boolean active = true;
 	
 	public Bullet(int x, int y, int direction){
