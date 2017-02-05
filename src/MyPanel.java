@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-public class MyPanel extends JPanel implements KeyListener{
+public class MyPanel extends JPanel implements KeyListener, Runnable{
 	
 	MyTank mt;
 	private int EnemyNumber = 3;
@@ -27,15 +27,30 @@ public class MyPanel extends JPanel implements KeyListener{
 	
 	public void paint(Graphics g){
 		// Graphics g is the painter
-		
 		super.paint(g);
 		
 		// draw the background (a rectangle)
 		g.fillRect(0, 0, 400, 300);
+		
+		// draw player's tank
 		this.drawTank(mt.getX(), mt.getY(), g, mt.getDirection(), 0);
+		
+		// draw enemies' tank
 		for (int i=0; i<EnemyNumber; i++){
 			this.drawTank(enemies.get(i).getX(), enemies.get(i).getY(), g, 2, 1);
 		}
+		
+		// draw bullets
+		for (int i=0;i<mt.bullets.size();i++){
+			Bullet myBullet = mt.bullets.get(i);
+				if (myBullet.isActive()){
+					g.setColor(Color.white);
+					g.fill3DRect(myBullet.getX(), myBullet.getY(), 3, 3, false);
+				} else {
+					mt.bullets.remove(myBullet);
+				}
+		}
+		
 	}
 	
 	public void drawTank(int x, int y, Graphics g, int direction, int type){
@@ -102,7 +117,7 @@ public class MyPanel extends JPanel implements KeyListener{
 			this.mt.goRight();
 		}
 		
-		if (e.getKeyCode() == KeyEvent.VK_J){
+		if (e.getKeyCode() == KeyEvent.VK_J && this.mt.bullets.size()<8){
 			this.mt.shoot();
 		}
 		
@@ -115,4 +130,20 @@ public class MyPanel extends JPanel implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {}
+
+	@Override
+	public void run() {
+		while(true){
+			try{
+				// repaint every 100 millisecond
+				// save the resources(memory)
+				Thread.sleep(100);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			this.repaint();
+		}
+		
+	}
 }
